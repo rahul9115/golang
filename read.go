@@ -7,16 +7,16 @@ import (
 	"strings"
 )
 
-type name struct {
+type Names struct {
 	fname string
 	lname string
 }
 
 func main() {
 
-	var a name
-
-	sli := make([]map[string]string, 0)
+	fname := " "
+	lname := " "
+	sli := []Names{}
 
 	f, err := os.Open("name.txt")
 	fmt.Println(err)
@@ -36,22 +36,23 @@ func main() {
 			}
 			fmt.Println(k)
 			if string(c) != " " && k != 1 {
-				a.fname = a.fname + string(c)
+				fname = fname + string(c)
 			}
 			if string(c) != " " && k == 1 {
 
-				a.lname = a.lname + string(c)
+				lname = lname + string(c)
 
 			}
 
 		}
-		names := map[string]string{
-			"first_name": a.fname,
-			"last_name":  a.lname}
-		sli = append(sli, names)
-
-		a.fname = " "
-		a.lname = " "
+		// names := {
+		// 	"first_name": a.fname,
+		// 	"last_name":  a.lname}
+		// sli = append(sli, names)
+		n1 := Names{fname, lname}
+		sli = append(sli, n1)
+		fname = " "
+		lname = " "
 
 	}
 	for i, line := range sli {
